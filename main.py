@@ -72,8 +72,7 @@ async def startFind(message: types.Message, state: FSMContext)->None:
     await state.set_state(ActorSearchStates.CHOOSING_TYPE)
     btn1 = InlineKeyboardButton(text="Актёр", callback_data="actors")
     btn2 = InlineKeyboardButton(text="Актриса", callback_data="actresses")
-    btn3 = InlineKeyboardButton(text="XXX", callback_data="XXX")
-    row = [btn1, btn2, btn3]
+    row = [btn1, btn2]
     rows = [row]
     markup = InlineKeyboardMarkup(inline_keyboard=rows)
     await message.answer(
@@ -90,8 +89,7 @@ async def uploadPhoto(callback_query: CallbackQuery, state: FSMContext)->None:
     else:
         btn1 = InlineKeyboardButton(text="Актёр", callback_data="actors")
         btn2 = InlineKeyboardButton(text="Актриса", callback_data="actresses")
-        btn3 = InlineKeyboardButton(text="XXX", callback_data="XXX")
-        row = [btn1, btn2, btn3]
+        row = [btn1, btn2]
         rows = [row]
         markup = InlineKeyboardMarkup(inline_keyboard=rows)
         await callback_query.message.answer("Ошибка! Повторите выбор.", reply_markup=markup,)
