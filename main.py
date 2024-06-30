@@ -66,29 +66,18 @@ async def answerToUser(data, chat_id):
 
 
 
-@dp.message(Command("start"))
-async def cmd_start(message: types.Message):
-    btn = InlineKeyboardButton(text=textButton, callback_data="started")
-    row = [btn]
-    rows = [row]
-    markup = InlineKeyboardMarkup(inline_keyboard=rows)
-    await message.answer(
-        "Бот успешно запущен!",
-        reply_markup=markup,
-    )
 
-@actorRouter.callback_query(F.data == "started")
-async def startFind(callback_query: CallbackQuery, state: FSMContext)->None:
+@actorRouter.message(Command("start"))
+async def startFind(message: types.Message, state: FSMContext)->None:
     await state.set_state(ActorSearchStates.CHOOSING_TYPE)
-    #await callback_query.message.delete()
     btn1 = InlineKeyboardButton(text="Актёр", callback_data="actors")
     btn2 = InlineKeyboardButton(text="Актриса", callback_data="actresses")
     btn3 = InlineKeyboardButton(text="XXX", callback_data="XXX")
     row = [btn1, btn2, btn3]
     rows = [row]
     markup = InlineKeyboardMarkup(inline_keyboard=rows)
-    await callback_query.message.answer(
-        "Выберите, кого искать? Актёра или актрису?",
+    await message.answer(
+        "Узнайте на кого похож человек! Выберите, кого искать. Актёра или актрису?",
         reply_markup=markup,
     )
 
